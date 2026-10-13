@@ -19,12 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+      - uses: actions/checkout@v5
       - name: Fetch and filter
-        run: python fetch.py --out docs
+        # the runner's own Python 3 is enough: fetch.py uses the standard library only
+        run: python3 fetch.py --out docs
         env:
           # optional: a news API on top of the feeds. Variable NEWS_API_PROVIDER (thenewsapi, currents, gnews, newsdata, newsapi)
           # and secret NEWS_API_KEY, both under Settings > Secrets and variables > Actions. Leave both unset to use the feeds alone.
