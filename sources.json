@@ -1,0 +1,357 @@
+{
+ "_about": "Sources and rules for the safety headlines on the AutoTQ industry pages. Read by fetch.py. Feeds were checked on 2026-10-13: each answered with recent items when asked with a browser-style user agent. gate: none = every item of the feed is about safety in that industry; safety = keep items whose title matches the safety pattern; about = keep items whose title matches the industry's own pattern (for feeds that cover every industry); both = title must match both. block drops a title everywhere; calm also drops incident wording on the pages where the news should be about readiness, not about attacks; soft caps how many lines of one list may be about a death.",
+ "window_days": 90,
+ "take": 4,
+ "min": 3,
+ "per_source": 2,
+ "soft_max": 1,
+ "safety": "safety|\\bosha\\b|niosh|injur|hazard|accident|emergenc|rescue|first[- ]aid|bleed|tourniquet|trauma|preparedness|\\bdrills?\\b|evacuat|inspection|citation|\\bcite[sd]?\\b|violation|\\bppe\\b|helmet|machine guard|lockout|amputat|fall protection|\\baeds?\\b|defibrillat|stop the bleed",
+ "block": "\\bwar\\b|drone attack|drone strike|missile|houthi|military|\\bnavy\\b|sanction|tariff|election|trump|biden|harris|republican|democrat|congress|senate|lawsuit|\\bsues?\\b|\\bsued\\b|settle|verdict|\\bsex|\\brape|molest|porn|racis|abortion|immigra|\\bice\\b|walkout|on strike|strike vote|layoff|earnings|share price|stock price|revenue|profit|funding round|\\bipo\\b|quarterly results|acqui|merger|awards? .{0,60}contract|contract award|podcast|webinar|sponsored|white ?paper|opinion|obituar|gruesome|horrific|dismember|decapitat|cyber|\\bbreach|ransomware|\\bhack|phishing|\\bai\\b|artificial intelligence|software|privacy|piracy|pirate|hijack|what i.?m reading|roundup|newsletter|\\bquiz|trivia|hiring|appoints?\\b|names? new|promoted to|case study|experience center|ticket|oyster|prescribed burn|scam|social security|\\bdelivers?\\b|unveil|expands? team|license plate|self-checkout|agentic",
+ "calm": "shoot|\\bshot\\b|gunman|gunfire|gun violence|\\bstab|murder|homicide|massacre|killed|slain|\\bdie[sd]?\\b|\\bdead\\b|death|fatal|suicide|abus|hazing|assault|kidnap|arrest|charged|indict|convict|sentenc|\\bfired\\b|resign|protest|riot|bomb|threat|hostage|ambush|manhunt|pursuit|crash|suspect|altercation|standoff|fugitive|use of force|body ?cam|video shows|wounded|\\binjured\\b|hospitaliz|critically|victim|lockdown|offender|drown(?!ing prevention)",
+ "soft": "fatal|\\bdie[sd]?\\b|\\bdead\\b|death|killed",
+ "cross": [
+  {
+   "name": "OSHA",
+   "url": "https://www.osha.gov/news/newsreleases.xml",
+   "gate": "about"
+  },
+  {
+   "name": "Safety+Health Magazine",
+   "url": "https://www.safetyandhealthmagazine.com/feed/",
+   "gate": "about"
+  },
+  {
+   "name": "Occupational Health & Safety",
+   "url": "https://ohsonline.com/rss-feeds/news.aspx",
+   "gate": "about"
+  },
+  {
+   "name": "ISHN",
+   "url": "https://www.ishn.com/rss/articles",
+   "gate": "about"
+  },
+  {
+   "name": "EHS Today",
+   "url": "https://www.ehstoday.com/__rss/website-scheduled-content.xml?input=%7B%22sectionAlias%22%3A%22home%22%7D",
+   "gate": "about"
+  },
+  {
+   "name": "EHS Today",
+   "url": "https://www.ehstoday.com/__rss/website-scheduled-content.xml?input=%7B%22sectionAlias%22%3A%22safety%22%7D",
+   "gate": "about"
+  },
+  {
+   "name": "EHS Leaders",
+   "url": "https://ehsleaders.org/feed/",
+   "gate": "about"
+  }
+ ],
+ "industries": {
+  "campuses": {
+   "calm": true,
+   "cross": false,
+   "window_days": 150,
+   "per_source": 3,
+   "about": "campus|universit|college|higher ed",
+   "safety_extra": "security|risk management|life safety|mass notification|public safety",
+   "query": "campus safety university emergency preparedness",
+   "feeds": [
+    {
+     "name": "Campus Security Today",
+     "url": "https://campussecuritytoday.com/rss-feeds/news.aspx",
+     "gate": "both"
+    },
+    {
+     "name": "Security Magazine",
+     "url": "https://www.securitymagazine.com/rss/topic/2241-education-university",
+     "gate": "none"
+    },
+    {
+     "name": "Higher Ed Dive",
+     "url": "https://www.highereddive.com/feeds/news/",
+     "gate": "safety"
+    },
+    {
+     "name": "Inside Higher Ed",
+     "url": "https://www.insidehighered.com/rss.xml",
+     "gate": "safety"
+    },
+    {
+     "name": "Campus Rec Magazine",
+     "url": "https://campusrecmag.com/feed/",
+     "gate": "safety"
+    }
+   ]
+  },
+  "construction": {
+   "calm": false,
+   "cross": true,
+   "about": "construct|contractor|trench|excavat|roofing|roofer|scaffold|\\bcrane|job ?site|work zone|demolition|solar|wind farm|lineman|line worker|pipeline|mining|\\bminers?\\b|logging",
+   "query": "construction site safety OSHA contractor",
+   "feeds": [
+    {
+     "name": "Safety+Health Magazine",
+     "url": "https://www.safetyandhealthmagazine.com/industry/construction/feed/",
+     "gate": "none"
+    },
+    {
+     "name": "ISHN",
+     "url": "https://www.ishn.com/rss/topic/2193-construction-industry-safety-and-health",
+     "gate": "none"
+    },
+    {
+     "name": "Engineering News-Record",
+     "url": "https://www.enr.com/rss/topic/555-safety-health",
+     "gate": "none"
+    },
+    {
+     "name": "Construction Dive",
+     "url": "https://www.constructiondive.com/feeds/news/",
+     "gate": "safety"
+    },
+    {
+     "name": "Solar Power World",
+     "url": "https://www.solarpowerworldonline.com/feed/",
+     "gate": "safety"
+    }
+   ]
+  },
+  "venues": {
+   "calm": true,
+   "cross": false,
+   "window_days": 150,
+   "per_source": 3,
+   "about": "stadium|arena|venue|crowd|concert|festival|spectator|game ?day|ballpark|special events?|sporting events?|sports|world cup|olympic|super bowl|tournament",
+   "safety_extra": "security|lightning|\\bheat\\b|crowd management|life safety|public safety",
+   "query": "stadium arena venue safety security emergency",
+   "feeds": [
+    {
+     "name": "Athletic Business",
+     "url": "https://www.athleticbusiness.com/rss",
+     "gate": "both"
+    },
+    {
+     "name": "Stadium Tech Report",
+     "url": "https://www.stadiumtechreport.com/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "IAVM",
+     "url": "https://iavm.org/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "Security Magazine",
+     "url": "https://www.securitymagazine.com/rss/topic/2240-arenas-stadiums-leagues-entertainment",
+     "gate": "about"
+    },
+    {
+     "name": "Sports Venue Business",
+     "url": "https://www.sportsvenuebusiness.com/feed/",
+     "gate": "safety"
+    }
+   ]
+  },
+  "warehousing": {
+   "calm": false,
+   "cross": true,
+   "window_days": 150,
+   "about": "warehous|forklift|lift truck|distribution center|fulfillment center|loading dock|pallet|conveyor|\\byard\\b|material handling",
+   "query": "warehouse safety forklift OSHA logistics",
+   "feeds": [
+    {
+     "name": "Safety+Health Magazine",
+     "url": "https://www.safetyandhealthmagazine.com/industry/wholesale-retail-trade/feed/",
+     "gate": "about"
+    },
+    {
+     "name": "DC Velocity",
+     "url": "https://www.dcvelocity.com/feeds/feed.rss",
+     "gate": "safety"
+    },
+    {
+     "name": "Supply Chain Dive",
+     "url": "https://www.supplychaindive.com/feeds/news/",
+     "gate": "safety"
+    },
+    {
+     "name": "Material Handling & Logistics",
+     "url": "https://www.mhlnews.com/__rss/website-scheduled-content.xml?input=%7B%22sectionAlias%22%3A%22home%22%7D",
+     "gate": "safety"
+    },
+    {
+     "name": "Modern Materials Handling",
+     "url": "https://feeds.feedburner.com/mmh/latest",
+     "gate": "safety"
+    }
+   ]
+  },
+  "law-enforcement": {
+   "calm": true,
+   "cross": false,
+   "about": "officer|police|deput|trooper|sheriff|law enforcement|patrol",
+   "safety_extra": "wellness|training|body armor|vest",
+   "query": "police officer safety training equipment first aid",
+   "feeds": [
+    {
+     "name": "Police1",
+     "url": "https://www.police1.com/officer-safety.rss",
+     "gate": "none"
+    },
+    {
+     "name": "Officer.com",
+     "url": "https://www.officer.com/__rss/website-scheduled-content.xml?input=%7B%22sectionAlias%22%3A%22training-careers%22%7D",
+     "gate": "both"
+    },
+    {
+     "name": "Police Chief Magazine",
+     "url": "https://www.policechiefmagazine.org/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "Police Magazine",
+     "url": "https://www.policemag.com/rss",
+     "gate": "both"
+    }
+   ]
+  },
+  "public-spaces": {
+   "calm": true,
+   "cross": false,
+   "window_days": 150,
+   "per_source": 3,
+   "about": "\\bparks?\\b|pool|aquatic|lifeguard|beach|recreation|playground|trail|public space|municipal|special events?",
+   "safety_extra": "lightning|\\bheat\\b|water safety|drowning prevention|life safety|public safety|lifeguard",
+   "query": "parks recreation aquatics public safety lifeguard",
+   "feeds": [
+    {
+     "name": "Aquatics International",
+     "url": "https://www.aquaticsintl.com/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "Pool & Spa News",
+     "url": "https://www.poolspanews.com/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "Campus Rec Magazine",
+     "url": "https://campusrecmag.com/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "Athletic Business",
+     "url": "https://www.athleticbusiness.com/rss",
+     "gate": "both"
+    }
+   ]
+  },
+  "manufacturing": {
+   "calm": false,
+   "cross": true,
+   "about": "manufactur|\\bplants?\\b|factory|machine|amputat|lockout|foundry|steel|\\bmills?\\b|assembly line|production line|chemical|refiner|combustible dust|stamping|food processing",
+   "query": "manufacturing plant safety OSHA machine guarding amputation",
+   "feeds": [
+    {
+     "name": "Safety+Health Magazine",
+     "url": "https://www.safetyandhealthmagazine.com/industry/manufacturing/feed/",
+     "gate": "none"
+    },
+    {
+     "name": "ISHN",
+     "url": "https://www.ishn.com/rss/topic/2231-facility-safety",
+     "gate": "about"
+    },
+    {
+     "name": "U.S. Chemical Safety Board",
+     "url": "https://www.csb.gov/rss/news.aspx",
+     "gate": "none"
+    },
+    {
+     "name": "Manufacturing Dive",
+     "url": "https://www.manufacturingdive.com/feeds/news/",
+     "gate": "safety"
+    },
+    {
+     "name": "IndustryWeek",
+     "url": "https://www.industryweek.com/__rss/website-scheduled-content.xml?input=%7B%22sectionAlias%22%3A%22home%22%7D",
+     "gate": "safety"
+    }
+   ]
+  },
+  "faith-schools": {
+   "calm": true,
+   "cross": false,
+   "about": "school|k-12|district|teacher|church|worship|congregation|faith|synagogue|mosque|parish",
+   "safety_extra": "security|risk management|life safety|public safety",
+   "query": "school safety emergency preparedness church security",
+   "feeds": [
+    {
+     "name": "Education Week",
+     "url": "https://www.edweek.org/leadership/school-climate-safety.rss",
+     "gate": "safety"
+    },
+    {
+     "name": "Security Magazine",
+     "url": "https://www.securitymagazine.com/rss/topic/2239-education-k-12",
+     "gate": "none"
+    },
+    {
+     "name": "K-12 Dive",
+     "url": "https://www.k12dive.com/feeds/news/",
+     "gate": "safety"
+    },
+    {
+     "name": "Church Executive",
+     "url": "https://churchexecutive.com/feed",
+     "gate": "safety"
+    },
+    {
+     "name": "Church Law & Tax",
+     "url": "https://www.churchlawandtax.com/feed/",
+     "gate": "safety"
+    }
+   ]
+  },
+  "maritime": {
+   "calm": false,
+   "cross": true,
+   "about": "vessel|\\bships?\\b|maritime|mariner|fishing|fisher|\\bboats?\\b|\\bports?\\b|longshore|tugboat|barge|offshore|coast guard|seafarer|overboard|shipyard",
+   "safety_extra": "\\bfires?\\b|explosion|collision|allision|grounding|aground|capsiz|\\bsinks?\\b|sinking|overboard|medevac|casualt|ntsb|lifeboat|abandon ship",
+   "query": "maritime safety commercial fishing vessel crew injury",
+   "feeds": [
+    {
+     "name": "The Maritime Executive",
+     "url": "https://maritime-executive.com/articles.rss",
+     "gate": "safety"
+    },
+    {
+     "name": "gCaptain",
+     "url": "https://gcaptain.com/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "Professional Mariner",
+     "url": "https://professionalmariner.com/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "Marine Log",
+     "url": "https://www.marinelog.com/feed/",
+     "gate": "safety"
+    },
+    {
+     "name": "MarineLink",
+     "url": "https://www.marinelink.com/news/rss",
+     "gate": "safety"
+    },
+    {
+     "name": "SeafoodSource",
+     "url": "https://www.seafoodsource.com/feed.xml",
+     "gate": "both"
+    }
+   ],
+   "per_source": 3
+  }
+ }
+}

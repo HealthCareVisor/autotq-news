@@ -1,0 +1,39 @@
+name: Update safety headlines
+
+# Every four hours: read the publishers' feeds, keep the safety headlines for each industry, and commit the small JSON
+# files in docs/ that the industry pages read. GitHub Pages serves docs/ (Settings > Pages > Deploy from a branch > /docs).
+on:
+  schedule:
+    - cron: "17 */4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-headlines
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch and filter
+        run: python fetch.py --out docs
+        env:
+          # optional: a news API on top of the feeds. Variable NEWS_API_PROVIDER (thenewsapi, currents, gnews, newsdata, newsapi)
+          # and secret NEWS_API_KEY, both under Settings > Secrets and variables > Actions. Leave both unset to use the feeds alone.
+          NEWS_API_PROVIDER: ${{ vars.NEWS_API_PROVIDER }}
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+      - name: Commit what changed
+        run: |
+          git config user.name "autotq-news"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git diff --cached --quiet || git commit -m "Update headlines"
+          git push
