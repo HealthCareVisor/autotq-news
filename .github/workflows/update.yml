@@ -1,10 +1,12 @@
 name: Update safety headlines
 
-# Every four hours: read the publishers' feeds, keep the safety headlines for each industry, and commit the small JSON
-# files in docs/ that the industry pages read. GitHub Pages serves docs/ (Settings > Pages > Deploy from a branch > /docs).
+# Every hour: read the publishers' feeds, keep the safety headlines for each industry, and commit the small JSON files
+# in docs/ that the industry pages read, when a list has changed. GitHub Pages serves docs/ (Settings > Pages > Deploy
+# from a branch > /docs). Hourly rather than every four hours because GitHub starts scheduled runs late and sometimes
+# skips one: with an hourly check a skipped run costs an hour, and a file is only rewritten when its headlines change.
 on:
   schedule:
-    - cron: "17 */4 * * *"
+    - cron: "17 * * * *"
   workflow_dispatch:
 
 permissions:

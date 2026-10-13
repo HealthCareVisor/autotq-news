@@ -5,7 +5,7 @@ industry, with the publisher and the date, each linking out to the publisher. No
 
 - `sources.json` lists the feeds (trade and safety publications, safety agencies) and the rules.
 - `fetch.py` reads them and writes one small JSON file per industry into `docs/`. Standard library only.
-- `.github/workflows/update.yml` runs it every four hours and commits what changed.
+- `.github/workflows/update.yml` runs it every hour and commits a list only when its headlines have changed.
 - GitHub Pages serves `docs/`, so a page reads `https://healthcarevisor.github.io/autotq-news/<industry>.json`.
 
 Nothing here is secret. No key is needed: the headlines come from the publishers' own feeds.
